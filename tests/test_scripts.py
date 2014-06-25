@@ -607,6 +607,17 @@ def test_load_graph_fail():
     assert "ERROR:" in err
 
 
+def test_load_graph_multithread():
+    script = scriptpath('load-graph.py')
+
+    outfile = utils.get_temp_filename('test')
+    infile = utils.get_test_data('test-reads.fa')
+
+    args = ['-N', '4', '-x', '1e9', '-T', '8', outfile, infile]
+
+    (status, out, err) = runscript(script, args)
+
+
 def _make_graph(infilename, min_hashsize=1e7, n_hashes=2, ksize=20,
                 do_partition=False,
                 annotate_partitions=False,
